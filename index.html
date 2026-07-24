@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONCOURS AUTO DETAILING</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0C0C0B;
+  --dark:     #111110;
+  --dark-2:   #1A1A18;
+  --gold:     #C9A84C;
+  --gold-hi:  #DEB95C;
+  --gold-dim: #705C28;
+  --cream:    #F5F1EB;
+  --cream-2:  #B8B4AF;
+  --muted:    #5A5A58;
+  --border:   #272725;
+  --serif: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
+  --sans:  -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  transition: background 0.4s, border-bottom 0.4s;
+}
+#nav.scrolled {
+  background: rgba(12,12,11,0.96);
+  border-bottom: 0.5px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 0.875rem;
+  letter-spacing: 0.45em;
+  color: var(--cream);
+  text-decoration: none;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.nav-links a {
+  color: var(--cream-2);
+  text-decoration: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-cta {
+  padding: 0.5rem 1.25rem !important;
+  border: 0.5px solid var(--gold) !important;
+  color: var(--gold) !important;
+  letter-spacing: 0.18em;
+  transition: background 0.2s, color 0.2s !important;
+}
+.nav-cta:hover {
+  background: var(--gold) !important;
+  color: var(--black) !important;
+}
+
+/* ─── HERO ────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 9rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ghost "C" — the signature element across all brand touchpoints */
+#hero::before {
+  content: 'C';
+  position: absolute;
+  font-family: var(--serif);
+  font-size: 58vw;
+  color: var(--cream);
+  opacity: 0.022;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+  line-height: 1;
+  user-select: none;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class^="hero-"] { animation: none !important; }
+}
+
+.hero-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2.25rem;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+.hero-brand {
+  font-family: var(--serif);
+  font-size: clamp(2.75rem, 9vw, 8.5rem);
+  letter-spacing: 0.3em;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1;
+  animation: fadeUp 0.7s ease 0.25s both;
+}
+.hero-rule {
+  width: 100px;
+  height: 0.5px;
+  background: var(--gold);
+  margin: 1.5rem auto;
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+.hero-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--cream-2);
+  margin-bottom: 2.75rem;
+  animation: fadeUp 0.7s ease 0.5s both;
+}
+.hero-tagline {
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 2.2vw, 1.5rem);
+  font-style: italic;
+  color: var(--cream);
+  max-width: 520px;
+  line-height: 1.6;
+  margin: 0 auto 1rem;
+  animation: fadeUp 0.7s ease 0.6s both;
+}
+.hero-desc {
+  font-size: 0.84rem;
+  color: var(--cream-2);
+  max-width: 440px;
+  margin: 0 auto 2.75rem;
+  line-height: 1.9;
+  animation: fadeUp 0.7s ease 0.7s both;
+}
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s ease 0.8s both;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  padding: 0.875rem 2.25rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-gold:hover { background: var(--gold-hi); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--cream-2);
+  border: 0.5px solid var(--border);
+  padding: 0.875rem 2.25rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover {
+  border-color: var(--cream-2);
+  color: var(--cream);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ─── SECTIONS ────────────────────────────────────────── */
+.sec { padding: 6rem 3rem; }
+.sec-inner { max-width: 960px; margin: 0 auto; }
+
+.label {
+  font-size: 0.62rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.title {
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+.rule {
+  width: 50px;
+  height: 0.5px;
+  background: var(--gold);
+  margin-bottom: 3rem;
+}
+
+/* ─── SERVICES ────────────────────────────────────────── */
+#services {
+  background: var(--dark);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+.svc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  border-bottom: 0.5px solid var(--border);
+  margin-bottom: 0;
+}
+.svc-note {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: right;
+  line-height: 1.75;
+  max-width: 200px;
+}
+.svc-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem 4rem;
+  padding: 2.25rem 0;
+  border-bottom: 0.5px solid var(--border);
+  align-items: start;
+}
+.svc-row:last-child { border-bottom: none; }
+.svc-row:hover .svc-name { color: var(--gold); }
+
+.svc-name {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  transition: color 0.2s;
+}
+.svc-badge {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 0.2rem 0.55rem;
+  vertical-align: middle;
+  margin-left: 0.75rem;
+  position: relative;
+  top: -2px;
+}
+.svc-desc {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 520px;
+}
+.svc-price-block { text-align: right; padding-top: 0.1rem; }
+.svc-price {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--gold);
+  display: block;
+}
+.svc-price-note {
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* ─── STORY ───────────────────────────────────────────── */
+#story { background: var(--black); }
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: 5rem;
+  align-items: start;
+}
+.story-frame {
+  width: 100%;
+  aspect-ratio: 4/5;
+  background: var(--dark-2);
+  border: 0.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.story-frame::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 0.5px solid var(--border);
+  pointer-events: none;
+}
+.story-frame-cdc {
+  font-family: var(--serif);
+  font-size: 2.25rem;
+  letter-spacing: 0.35em;
+  color: #323230;
+  margin-bottom: 0.5rem;
+}
+.story-frame-note {
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.story-cap {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+.story-body {
+  font-size: 0.875rem;
+  color: var(--cream-2);
+  line-height: 2;
+  margin-bottom: 1.25rem;
+}
+.story-quote {
+  border-left: 0.5px solid var(--gold);
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  margin: 2.25rem 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--cream);
+  line-height: 1.7;
+}
+
+/* ─── STANDARDS ───────────────────────────────────────── */
+#standards {
+  background: var(--dark);
+  border-top: 0.5px solid var(--border);
+}
+.std-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 3.5rem;
+}
+.std-card {
+  padding: 2rem 2rem 2rem 0;
+  border-right: 0.5px solid var(--border);
+}
+.std-card:first-child { border-top: 0.5px solid var(--gold); padding-top: 1.5rem; }
+.std-card:not(:first-child) { border-top: 0.5px solid var(--border); padding-top: 1.5rem; }
+.std-card:last-child { border-right: none; }
+.std-numeral {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  color: var(--gold);
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+.std-name {
+  font-family: var(--serif);
+  font-size: 1rem;
+  color: var(--cream);
+  font-weight: 400;
+  margin-bottom: 0.625rem;
+}
+.std-text {
+  font-size: 0.775rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* ─── BOOKING CTA ─────────────────────────────────────── */
+#book {
+  background: var(--black);
+  border-top: 0.5px solid var(--border);
+  text-align: center;
+  padding: 7rem 3rem;
+}
+.book-title {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 400;
+  color: var(--cream);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+.book-rule {
+  width: 60px;
+  height: 0.5px;
+  background: var(--gold);
+  margin: 1.25rem auto;
+}
+.book-desc {
+  font-size: 0.875rem;
+  color: var(--cream-2);
+  max-width: 440px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.9;
+}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer {
+  background: var(--dark);
+  border-top: 0.5px solid var(--border);
+  padding: 3.5rem 3rem;
+}
+.ft-top {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.ft-brand {
+  font-family: var(--serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.42em;
+  color: var(--cream);
+  margin-bottom: 0.25rem;
+}
+.ft-brand-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+.ft-rule {
+  width: 38px;
+  height: 0.5px;
+  background: var(--gold);
+  margin-bottom: 1rem;
+}
+.ft-desc {
+  font-size: 0.775rem;
+  color: var(--muted);
+  line-height: 1.85;
+}
+.ft-col-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+}
+.ft-list { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+.ft-list a {
+  font-size: 0.8rem;
+  color: var(--cream-2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ft-list a:hover { color: var(--cream); }
+.ft-bottom {
+  max-width: 960px;
+  margin: 2rem auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ft-copy { font-size: 0.65rem; color: var(--muted); }
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .std-grid { grid-template-columns: 1fr 1fr; }
+  .std-card { border-right: none; }
+  .std-card:nth-child(odd) { border-right: 0.5px solid var(--border); }
+  .std-card:nth-child(3) { border-right: none; }
+}
+@media (max-width: 768px) {
+  #nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .sec { padding: 4rem 1.5rem; }
+  #book { padding: 5rem 1.5rem; }
+  footer { padding: 3rem 1.5rem; }
+  .svc-head { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+  .svc-note { text-align: left; max-width: 100%; }
+  .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ft-top { grid-template-columns: 1fr; gap: 2rem; }
+  .ft-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+@media (max-width: 520px) {
+  .std-grid { grid-template-columns: 1fr; }
+  .std-card { border-right: none !important; }
+  .svc-row { grid-template-columns: 1fr; }
+  .svc-price-block { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">CONCOURS</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#standards">Why Us</a></li>
+    <li><a href="#book" class="nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Calgary, Alberta &middot; Est. 2025</p>
+  <h1 class="hero-brand">CONCOURS</h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">Auto Detailing</p>
+  <p class="hero-tagline">The standard of a Concours judge. Applied to your car.</p>
+  <p class="hero-desc">Calgary's premium auto detailing service — mobile or drop-off. Two brothers, over ten years in luxury cars, and a mechanic's understanding of what lies beneath the surface.</p>
+  <div class="hero-ctas">
+    <a href="#book" class="btn-gold">Book a Detail</a>
+    <a href="#services" class="btn-outline">Our Services</a>
+  </div>
+  <p class="hero-scroll">Scroll to explore</p>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="sec">
+  <div class="sec-inner">
+    <div class="svc-head">
+      <div>
+        <p class="label">What We Offer</p>
+        <h2 class="title">Services</h2>
+      </div>
+      <p class="svc-note">Mobile across Calgary, or drop off at our location in Walden SW.</p>
+    </div>
+
+    <div class="svc-row">
+      <div>
+        <h3 class="svc-name">Interior Detail</h3>
+        <p class="svc-desc">A thorough interior restoration — vacuuming, steam cleaning, leather conditioning, and surface treatment. Every surface addressed, every corner reached. The inside of your car, taken seriously.</p>
+      </div>
+      <div class="svc-price-block">
+        <span class="svc-price">$120</span>
+        <span class="svc-price-note">from</span>
+      </div>
+    </div>
+
+    <div class="svc-row">
+      <div>
+        <h3 class="svc-name">Exterior Wash &amp; Protect</h3>
+        <p class="svc-desc">Careful hand wash, clay bar decontamination, and protective sealant application. The foundation of any well-maintained finish — done properly, not quickly.</p>
+      </div>
+      <div class="svc-price-block">
+        <span class="svc-price">$40</span>
+        <span class="svc-price-note">from</span>
+      </div>
+    </div>
+
+    <div class="svc-row">
+      <div>
+        <h3 class="svc-name">Polish</h3>
+        <p class="svc-desc">Careful hand wash, clay bar decontamination, and protective sealant application. The foundation of any well-maintained finish — done properly, not quickly.</p>
+      </div>
+      <div class="svc-price-block">
+        <span class="svc-price">$750</span>
+        <span class="svc-price-note">flat rate</span>
+      </div>
+    </div>
+
+    <div class="svc-row">
+      <div>
+        <h3 class="svc-name">Polish + Ceramic Coating <span class="svc-badge">Signature</span></h3>
+        <p class="svc-desc">Our flagship. Full paint correction followed by professional ceramic coating — years of protection, a mirror-finish gloss, and effortless ongoing maintenance. The Concours standard, applied to your driveway.</p>
+      </div>
+      <div class="svc-price-block">
+        <span class="svc-price">$1,000</span>
+        <span class="svc-price-note">flat rate</span>
+      </div>
+    </div>
+
+    <div class="svc-row">
+      <div>
+        <h3 class="svc-name">Headlight Restoration</h3>
+        <p class="svc-desc">Yellowed, hazed, or oxidised headlights sanded back, machine polished, and sealed with UV protection. Optical clarity and nighttime safety restored. Results that last years, not months.</p>
+      </div>
+      <div class="svc-price-block">
+        <span class="svc-price">$45</span>
+        <span class="svc-price-note">per pair</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story" class="sec">
+  <div class="sec-inner">
+    <div class="story-grid">
+      <div>
+        <div class="story-frame">
+          <p class="story-frame-cdc">CDC</p>
+          <p class="story-frame-note">Photo coming soon</p>
+        </div>
+        <p class="story-cap">The brothers &mdash; Calgary, AB</p>
+      </div>
+      <div>
+        <p class="label">Our Story</p>
+        <h2 class="title">Two Brothers.<br>One Standard.</h2>
+        <div class="rule"></div>
+        <p class="story-body">Concours Detailing Co. was founded by two brothers who grew up around cars. One became a mechanic. One became obsessed with the finish. Between them, they cover everything a car needs — and nothing gets missed.</p>
+        <p class="story-body">With over ten years in the luxury automotive space, we've worked on vehicles that most people only see in magazines. We know what a Concours-standard finish looks like up close — because we've been there, studying the cars that take the trophies.</p>
+        <blockquote class="story-quote">We treat every car the way Concours judges do — with a critical eye, genuine reverence, and the understanding that the details are everything.</blockquote>
+        <p class="story-body">We come to you — your driveway, your garage, your parking spot. Or drop your car at our location in Walden SW if that suits your schedule better. Either way, your car is in the same hands, held to the same standard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section id="standards" class="sec">
+  <div class="sec-inner">
+    <p class="label">Why Concours</p>
+    <h2 class="title">The Difference</h2>
+    <div class="std-grid">
+      <div class="std-card">
+        <p class="std-numeral">I</p>
+        <h3 class="std-name">Mechanic Expertise</h3>
+        <p class="std-text">We don't just clean surfaces. With a licensed mechanic on the team, we understand what lies beneath every panel — and it shows in how carefully we approach every gap, seal, and component.</p>
+      </div>
+      <div class="std-card">
+        <p class="std-numeral">II</p>
+        <h3 class="std-name">Concours Standard</h3>
+        <p class="std-text">Concours d'Élégance judges inspect beneath fenders with mirrors. We apply that same exacting attention — no overspray, no missed seams, no shortcuts in paint correction.</p>
+      </div>
+      <div class="std-card">
+        <p class="std-numeral">III</p>
+        <h3 class="std-name">Your Way</h3>
+        <p class="std-text">We come to you — home, office, or garage. Or drop your car at our location in Walden SW if that works better. Either way, no compromises on the quality of the work.</p>
+      </div>
+      <div class="std-card">
+        <p class="std-numeral">IV</p>
+        <h3 class="std-name">10+ Years in the Field</h3>
+        <p class="std-text">A decade in luxury automotive means we've seen everything — and know how to handle it. From daily drivers to collector cars, your vehicle is in hands that understand cars.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK CTA -->
+<section id="book">
+  <p class="label" style="text-align:center; margin-bottom:1.5rem;">Ready?</p>
+  <h2 class="book-title">Book Your Detail</h2>
+  <div class="book-rule"></div>
+  <p class="book-desc">Mobile across Calgary and surrounding areas, or drop off at our Walden SW location. We'll confirm your booking within 24 hours and handle everything from there.</p>
+  <a href="mailto:concoursautodetails@gmail.com" class="btn-gold">Book Now &rarr;</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <p class="ft-brand">CONCOURS</p>
+      <p class="ft-brand-sub">Detailing Co.</p>
+      <div class="ft-rule"></div>
+      <p class="ft-desc">Calgary's premium auto detailing service. Mobile across the city, or drop off at our Walden SW location. Specialists in ceramic coating, paint correction, interior restoration, and headlight renewal. Founded by two brothers with over a decade in luxury cars.</p>
+    </div>
+    <div>
+      <p class="ft-col-label">Services</p>
+      <ul class="ft-list">
+        <li><a href="#services">Interior Detail</a></li>
+        <li><a href="#services">Exterior Wash &amp; Protect</a></li>
+        <li><a href="#services">Polish</a></li>
+        <li><a href="#services">Polish + Ceramic Coating</a></li>
+        <li><a href="#services">Headlight Restoration</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="ft-col-label">Get in Touch</p>
+      <ul class="ft-list">
+        <li><a href="tel:+14030000000">(403) 465-1265</a></li>
+        <li><a href="mailto:concoursautodetails@gmail.com">concoursautodetails@gmail.com</a></li>
+        <li><a href="#">Walden SW, Calgary</a></li>
+        <li><a href="#book">Book Online</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p class="ft-copy">&copy; 2025 Concours Detailing Co. All rights reserved. Calgary, Alberta.</p>
+    <p class="ft-copy">Est. 2025 &middot; Premium Mobile Auto Detail</p>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+</script>
+
+</body>
+</html>
