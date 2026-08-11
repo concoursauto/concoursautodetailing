@@ -624,7 +624,73 @@ A complete interior deep-clean and restoration. Includes a full vacuum, wipe-dow
 
     <div class="svc-row">
       <div>
-        <h3 class="svc-name">Polish</h3>
+        <style>
+  .svc-name {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .svc-name .tooltip-text {
+    display: none;
+    width: 320px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 12px 14px;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+
+  .svc-name .tooltip-text strong {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    color: #fff;
+  }
+
+  .svc-name .tooltip-text strong:first-child {
+    margin-top: 0;
+  }
+
+  .svc-name.active .tooltip-text {
+    display: block;
+  }
+</style>
+
+<h3 class="svc-name" onclick="this.classList.toggle('active')">
+  1-4 Stage Polish
+  <span class="tooltip-text">
+    <strong>1-Stage Polish (Single-Step)</strong>
+    A single all-in-one polish pass to enhance gloss and remove very light swirls/haze. Doesn't correct deeper scratches. Good for maintenance or vehicles in decent condition.
+
+    <strong>2-Stage Polish</strong>
+    Compound pass (heavier cut to remove moderate scratches, swirls, and oxidation) followed by a finishing polish pass to refine and add gloss. This is the most common correction level for noticeably dull or swirled paint.
+
+    <strong>3-Stage Polish (Full Paint Correction)</strong>
+    Heavy cut/compound, medium polish, then fine finishing polish — three separate passes for maximum defect removal (deep scratches, heavy oxidation, RIDS). Used on severely neglected or show-quality vehicles.
+
+    <strong>4th Stage – Ceramic Coating / Sealant Application</strong>
+    After the 3 correction stages (compound, polish, finish), a ceramic coating or paint sealant is applied as a separate final stage to lock in the corrected finish and provide long-term protection (often lasting 1-5+ years depending on the product).
+  </span>
+</h3>
+
+<script>
+  document.addEventListener('click', function(e) {
+    document.querySelectorAll('.svc-name.active').forEach(function(el) {
+      if (!el.contains(e.target)) {
+        el.classList.remove('active');
+      }
+    });
+  });
+</script>
         <p class="svc-desc">Careful hand wash, clay bar decontamination, and protective sealant application. The foundation of any well-maintained finish — done properly, not quickly.</p>
       </div>
       <div class="svc-price-block">
